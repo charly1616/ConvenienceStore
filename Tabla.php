@@ -58,31 +58,56 @@ $objeto = json_decode($response);
         <th>VER MAS</th>
     </thead>
     <tbody>
+<?php foreach ($objeto as $reg): ?>
+    <tr>
+        <td><?=$reg->id?></td>
+        <td><?=$reg->title?></td>
+        <td>$<?=$reg->price?></td>
+        <td><?=$reg->category?></td>
+        <td>
+            <!-- Botón que abre el modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProducto<?=$reg->id?>">
+                <i class="fa-solid fa-eye"></i> Ver Detalles
+            </button>
+        </td>
+    </tr>
 
-    <?php
-        foreach ($objeto as $reg){
-            ?>
+    <!-- Modal dinámico -->
+    <div class="modal fade" id="modalProducto<?=$reg->id?>" tabindex="-1" aria-labelledby="modalProductoLabel<?=$reg->id?>" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          
+          <!-- Header -->
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalProductoLabel<?=$reg->id?>"><?=$reg->title?></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          
+          <!-- Body -->
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-4 text-center">
+                <img src="<?=$reg->image?>" alt="<?=$reg->title?>" class="img-fluid">
+              </div>
+              <div class="col-md-8">
+                <p><strong>Precio:</strong> $<?=$reg->price?></p>
+                <p><strong>Categoría:</strong> <?=$reg->category?></p>
+                <p><strong>Descripción:</strong> <?=$reg->description?></p>
+                <p><strong>Rating:</strong> ⭐ <?=$reg->rating->rate?> (<?=$reg->rating->count?> reseñas)</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<?php endforeach; ?>
+</tbody>
 
-            <tr>
-                <td><?=$reg->id?></td>
-                <td><?=$reg->title?></td>
-                <td>$<?=$reg->price?></td>
-                <td><?=$reg->category?></td>
-                <td>
-                    <a href="Tabla.php" class="btn btn-primary">
-                        <i class="fa-solid fa-eye"></i> Ver Detalles
-                    </a>
-                </td>
-            </tr>
-
-            <?php
-        }
-
-    ?>
-
-    
-
-    </tbody>
 </table>
 
 
