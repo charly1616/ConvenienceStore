@@ -7,7 +7,16 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css">
 </head>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-
+ <body>
+    <ul class="nav justify-content-center fs-5">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/ConvenienceStore/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Listado.php">Listado</a>
+        </li>
+      </ul>
+ </body>
 <?php
 
 $curl = curl_init(); //inicia la sesión cURL

@@ -19,47 +19,78 @@
       <title>Taller Front</title>
   </head>
 
+  <?php
+    // Generar número aleatorio entre 1 y 20
+    $randomNumber = rand(1, 20);
+
+    $curl = curl_init(); 
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => "https://fakestoreapi.com/products/" . $randomNumber, 
+      CURLOPT_RETURNTRANSFER => true, 
+      CURLOPT_FOLLOWLOCATION => true, 
+      CURLOPT_ENCODING => "", 
+      CURLOPT_MAXREDIRS => 10, 
+      CURLOPT_TIMEOUT => 30, 
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1, 
+      CURLOPT_CUSTOMREQUEST => "GET", 
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl); 
+
+    curl_close($curl); 
+
+    if ($err) {
+      echo "cURL Error #:" . $err;
+      exit(1);
+    }
+
+    $objeto = json_decode($response);
+
+?>
+
+
     <body>
 
-      <ul class="nav justify-content-center">
+      <ul class="nav justify-content-center fs-5">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Active</a>
+          <a class="nav-link active" aria-current="page" href="/ConvenienceStore/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          <a class="nav-link" href="Listado.php">Listado</a>
         </li>
       </ul>
+      
+      <p class="text-center fs-4">Producto Recomendado del Día</p>
 
-    <div class="d-flex justify-content-center">
-      <div class="card mb-3" style="max-width: 940px;">
-        <div class="row g-0">
-          <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
-            <img src="https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_t.png" 
-                class="img-fluid rounded-start" 
-                alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet</h5>
-              <p class="card-text">
-                From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. 
-                Wear facing inward to be bestowed with love and abundance, or outward for protection.
-              </p>
-              <a href="#" class="btn btn-primary">
-                <i class="fa-solid fa-eye"></i> Ver Detalles
-              </a>
 
+          <div class="d-flex justify-content-center">
+        <div class="card mb-3" style="max-width: 940px;">
+          <div class="row g-0">
+            <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+              <!-- image -->
+              <img src="<?=$objeto->image?>" 
+                  class="img-fluid rounded-start" 
+                  alt="Imagen del producto">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <!-- title -->
+                <h5 class="card-title"><?=$objeto->title?></h5>
+                <!-- price -->
+                <p class="card-text">
+                  Precio: $<?=$objeto->price?>
+                </p>
+                <a href="Tabla.php" class="btn btn-primary">
+                  <i class="fa-solid fa-eye"></i> Ver Detalles
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+
 
 
     </body>
