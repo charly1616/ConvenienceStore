@@ -1,13 +1,19 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.rtl.min.css" integrity="sha384-Xbg45MqvDIk1e563NLpGEulpX6AvL404DP+/iCgW9eFa2BqztiwTexswJo2jLMue" crossorigin="anonymous">
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 
 <?php
 
 $curl = curl_init(); //inicia la sesión cURL
 
 curl_setopt_array($curl, array(
-	CURLOPT_URL => "http://localhost/apieventos/getclientes.php", //url a la que se conecta
+	CURLOPT_URL => "https://fakestoreapi.com/products", //url a la que se conecta
 	CURLOPT_RETURNTRANSFER => true, //devuelve el resultado como una cadena del tipo curl_exec
 	CURLOPT_FOLLOWLOCATION => true, //sigue el encabezado que le envíe el servidor
 	CURLOPT_ENCODING => "", // permite decodificar la respuesta y puede ser"identity", "deflate", y "gzip", si está vacío recibe todos los disponibles.
@@ -31,23 +37,16 @@ $objeto = json_decode($response);
 ?>
 
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal" data-bs-whatever="@mdo"><i class="fa-solid fa-user-plus"></i></button>
-
-<?php
-    include("add.php");
-?>
-<?php include("Edit.php");?>
-
 
 
 
 <table class="table table-striped table-hover" id="TablaClientes">
     <thead>
         <th>ID</th>
-        <th>NOMBRES</th>
-        <th>TELEFONO</th>
-        <th>CORREO</th>
-        <th>ACCION</th>
+        <th>TITULO</th>
+        <th>PRECIO</th>
+        <th>CATEGORIA</th>
+        <th>VER MAS</th>
     </thead>
     <tbody>
 
@@ -56,17 +55,12 @@ $objeto = json_decode($response);
             ?>
 
             <tr>
-                <td> <?=$reg->id?> </td>
-                <td> <?=$reg->nombres." ".$reg->apellidos?> </td>
-                <td> <?=$reg->telefono?> </td>
-                <td> <?=$reg->correo?> </td>
-                <td> 
-                    <button type="button" class="btn btn-danger" onclick="Eliminar(<?=$reg->id?>);"> <i class="fa-solid fa-user-minus"></i></button>
-                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@mdo"
-                        onclick="Editar(<?=$reg->id?>, '<?=$reg->nombres?>', '<?=$reg->apellidos?>', '<?=$reg->telefono?>', '<?=$reg->direccion?>', '<?=$reg->correo?>');">
-                        <i class="fa-solid fa-pen"></i>
-                    </button>
-
+                <td><?=$reg->id?></td>
+                <td><?=$reg->title?></td>
+                <td>$<?=$reg->price?></td>
+                <td><?=$reg->category?></td>
+                <td>
+                    <button type="button" class="btn btn-info"> <i class="fa-regular fa-circle-question" style="color: #ffffff;"></i></button>
                 </td>
             </tr>
 
@@ -78,60 +72,8 @@ $objeto = json_decode($response);
     
 
     </tbody>
-    <tfoot>
-        <th>ID</th>
-        <th>NOMBRES</th>
-        <th>TELEFONO</th>
-        <th>CORREO</th>
-    </tfoot>
 </table>
 
-
-<script>
-    async function Eliminar(id){
-
-        Swal.fire({
-            title: "¿¿Seguro que quieres eliminar?? a "+id+" O.o",
-            text: "No podras recuperarlo",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Si eliminar"
-        }).then((result) => {
-                if (result.isConfirmed) {
-
-
-                    const response = fetch("http://localhost/apieventos/deleteCliente.php", {
-                        method: "DELETE",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body:  JSON.stringify({"id": id})})
-                    .then(()=>{
-                        
-                        Swal.fire({
-                        title: "Deleted!",
-                        text: "Your file has been deleted.",
-                        icon: "success"})
-                    .then(()=>{
-                        location.reload();
-                    })
-                })
-            }});
-    }
-
-    function Editar(id, noms, aps, tels,dir, corr){
-
-        document.getElementById("editid").value = id;
-        document.getElementById("editnombres").value = noms;
-        document.getElementById("editapellidos").value = aps;
-        document.getElementById("editcorreo").value = corr;
-        document.getElementById("edittelefono").value = tels;
-        document.getElementById("editdireccion").value = dir;
-
-    }
-</script>
 
 
 <script>
