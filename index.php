@@ -91,6 +91,41 @@
         </div>
       </div>
 
+      <div class="container">
+    <div class="container text-center" style="width: 70%;">
+        <h1>Categorias Destacadas</h1>
+        <br><br>
+        <div class="row align-items-center justify-content-between">
+
+            <div class="card" style="width: 12rem;">
+                
+                <img src="Images/MenIcon.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h4 class="card-title">Men's clothing</h4>
+                </div>
+            </div>
+            <div class="card" style="width: 12rem;">
+                <img src="Images/WomIcon.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h4 class="card-title">Women's clothing</h4>
+                </div>
+            </div>
+            <div class="card" style="width: 12rem;">
+                <img src="Images/JewIcon.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h4 class="card-title">Jewelery and Rings</h4>
+                </div>
+            </div>
+            <div class="card" style="width: 12rem;">
+                <img src="Images/EleIcon.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h4 class="card-title">Electronics and Devices</h4>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
 
 
     </body>
