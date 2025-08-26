@@ -13,7 +13,10 @@
       <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css">
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.rtl.min.css" integrity="sha384-Xbg45MqvDIk1e563NLpGEulpX6AvL404DP+/iCgW9eFa2BqztiwTexswJo2jLMue" crossorigin="anonymous">
-      
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
+        crossorigin="anonymous"></script>
+
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
       <title>Taller Front</title>
@@ -82,9 +85,53 @@
                 <p class="card-text">
                   Precio: $<?=$objeto->price?>
                 </p>
-                <a href="Listado.php" class="btn btn-primary">
-                  <i class="fa-solid fa-eye"></i> Ver Detalles
-                </a>
+                
+                <!-- Button trigger modal -->
+                  <!-- Botón que abre el modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProducto<?=$objeto->id?>">
+  <i class="fa-solid fa-eye"></i> Ver detalles
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modalProducto<?=$objeto->id?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalProductoLabel<?=$objeto->id?>" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      
+      <!-- Header -->
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalProductoLabel<?=$objeto->id?>">
+          <?=$objeto->title?>
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      
+      <!-- Body -->
+      <div class="modal-body">
+        <div class="row">
+          <!-- Imagen -->
+          <div class="col-md-4 text-center">
+            <img src="<?=$objeto->image?>" alt="<?=$objeto->title?>" class="img-fluid">
+          </div>
+          
+          <!-- Info -->
+          <div class="col-md-8">
+            <p><strong>Precio:</strong> $<?=$objeto->price?></p>
+            <p><strong>Categoría:</strong> <?=$objeto->category?></p>
+            <p><strong>Descripción:</strong> <?=$objeto->description?></p>
+            <p><strong>Rating:</strong> ⭐ <?=$objeto->rating->rate?> (<?=$objeto->rating->count?> reseñas)</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <a href="Listado.php" class="btn btn-primary">Ir al listado</a>
+      </div>
+    </div>
+  </div>
+</div>
+
               </div>
             </div>
           </div>
