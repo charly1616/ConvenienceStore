@@ -46,7 +46,7 @@ $objeto = json_decode($response);
 ?>
 
 
-
+<h1>Listado de Productos</h1>
 
 
 <table class="table table-striped table-hover" id="TablaClientes">
@@ -69,7 +69,9 @@ $objeto = json_decode($response);
                 <td>$<?=$reg->price?></td>
                 <td><?=$reg->category?></td>
                 <td>
-                    <button type="button" class="btn btn-info"> <i class="fa-regular fa-circle-question" style="color: #ffffff;"></i></button>
+                    <a href="Tabla.php" class="btn btn-primary">
+                        <i class="fa-solid fa-eye"></i> Ver Detalles
+                    </a>
                 </td>
             </tr>
 

@@ -82,7 +82,7 @@
                 <p class="card-text">
                   Precio: $<?=$objeto->price?>
                 </p>
-                <a href="Tabla.php" class="btn btn-primary">
+                <a href="Listado.php" class="btn btn-primary">
                   <i class="fa-solid fa-eye"></i> Ver Detalles
                 </a>
               </div>
